@@ -117,9 +117,9 @@ class OCTAInhouseBinaryDatasetText(Dataset):
     def getAllPath(self, root, isTraining):
         items = []
         if isTraining:
-            filePath = '/home/lwangdk/Enface_FSSY-220825-221230/v3_reg/folds_info/train_{}.csv'.format(str(self.fold))
+            filePath = 'data/Label/folds_info/train_{}.csv'.format(str(self.fold))
         else:
-            filePath = '/home/lwangdk/Enface_FSSY-220825-221230/v3_reg/folds_info/test_{}.csv'.format(str(self.fold))
+            filePath = 'data/Label/folds_info/test_{}.csv'.format(str(self.fold))
 
         with open(filePath,'r') as csvFile:
             reader = csv.reader(csvFile)
@@ -132,11 +132,6 @@ class OCTAInhouseBinaryDatasetText(Dataset):
                     items.append([item[0], item[2], item[3], item[4], item[5], item[6], item[8], item[9], item[10], item[11], item[12], item[13], item[14], item[15]])
                 elif left_right == '1' and front_back == 'L':
                     items.append([item[0], item[2], item[3], item[4], item[5], item[6], item[8], item[9], item[10], item[11], item[12], item[13], item[14], item[15]])
-                ## select front (reverse)
-                # if left_right == '0' and front_back == 'L':         
-                #     items.append([item[0], item[2], item[3], item[4], item[5], item[6], item[7]])
-                # elif left_right == '1' and front_back == 'R':
-                #     items.append([item[0], item[2], item[3], item[4], item[5], item[6], item[7]])
         
         return items
 
@@ -272,7 +267,7 @@ def eval_linear(args):
     aupr_with_best_auc = 0
 
     if args.eval:
-        test_stats, output, target, test_logs = validate_network(val_loader, model, info_projector, info_projector_text, linear_classifier, args.n_last_blocks, args.avgpool_patchtokens, verbose=True, output_dir=args.output_dir, task='{}_fold{}'.format(args.task, args.fold))
+        test_stats, output, target, test_logs = validate_network_vsl(val_loader, model, info_projector, info_projector_text, linear_classifier, args.n_last_blocks, args.avgpool_patchtokens, verbose=True, output_dir=args.output_dir, task='{}_fold{}'.format(args.task, args.fold))
 
     for epoch in range(start_epoch, args.epochs):
         # train_loader.sampler.set_epoch(epoch)
@@ -308,20 +303,12 @@ def eval_linear(args):
                     "visionfm_state_dict": model.state_dict(),
                     "optimizer": optimizer.state_dict(),
                     "scheduler": scheduler.state_dict(),
-                    # "best_auc": test_stats["auc"],
                 }
                 torch.save(save_dict, os.path.join(args.output_dir, "checkpoint_best_finetune.pth"))
                 np.save(os.path.join(args.output_dir, 'best.npy'), output)
                 np.save(os.path.join(args.output_dir, 'target.npy'), target)
 
-                # aupr_with_best_auc = test_stats['aupr']
-
-            # best_auc = max(best_auc, test_stats["auc"])
-            # print(f'Best val auc so far: {best_auc:.4f}; accompanying aupr: {aupr_with_best_auc:.4f}')
-
-    # test_stats, output, target, test_logs = validate_network(val_loader, model, info_projector, linear_classifier, args.n_last_blocks, args.avgpool_patchtokens, verbose=True, output_dir=args.output_dir, task=args.task)
     print("Finetuning of VisionFM completed")
-                # "Best val auc: {acc:.4f}; accompanying aupr: {aupr:.4f}".format(acc=best_auc, aupr=aupr_with_best_auc))
 
 def train_vsl(args, model, info_projector, info_projector_text, linear_classifier, optimizer, loader, epoch, n, avgpool):
     metric_logger = utils.MetricLogger(delimiter="  ")
@@ -522,7 +509,7 @@ if __name__ == '__main__':
     parser.add_argument("--dist_url", default="env://", type=str, help="""url used to set up
         distributed training; see https://pytorch.org/docs/stable/distributed.html""")
     parser.add_argument("--local_rank", default=0, type=int, help="Please ignore and do not set this argument.")
-    parser.add_argument('--data_path', default='/home/lwangdk/Enface_FSSY-220825-221230/OCTA-Enface/Cut', type=str,
+    parser.add_argument('--data_path', default='data/OCTA-Enface', type=str,
         help='Please specify path to the eye image data.')
     parser.add_argument('--seed', default=0, type=int)
     parser.add_argument('--modality', default='Fundus', type=str)
@@ -540,9 +527,9 @@ if __name__ == '__main__':
     parser.add_argument('--eval', action='store_true', #default=True,
                         help='Perform evaluation only')
     parser.add_argument('--gpu', type=str, default="1")
-    parser.add_argument('--order_path', type=str, default="img2order_srd.pkl")
-    parser.add_argument('--inverse_order_path', type=str, default="img2inverseorder_srd.pkl")
-    parser.add_argument('--text_path', type=str, default="/home/lwangdk/Enface_FSSY-220825-221230/p2res_clean_disease.json")
+    parser.add_argument('--order_path', type=str, default="img2order.pkl")
+    parser.add_argument('--inverse_order_path', type=str, default="img2inverseorder.pkl")
+    parser.add_argument('--text_path', type=str, default="vessel_descrp/p2res_disease.json")
     parser.add_argument("--temperature", default=0.07, type=float)
     
     args = parser.parse_args()

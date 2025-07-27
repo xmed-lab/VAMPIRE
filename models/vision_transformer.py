@@ -293,35 +293,6 @@ class VisionTransformer(nn.Module):
         # x = self.pre_logits(x) # default in Sp16: Identity
         return x if pre_logits else self.head(x) # default in Sp16: pre_logits: False
 
-    # def forward(self, x, return_all_tokens=None, mask=None, maps=None):
-        # # mim
-        # if self.masked_im_modeling:
-        #     assert mask is not None
-        #     x = self.prepare_tokens(x, mask=mask)
-        # else:
-        #     x = self.prepare_tokens(x) # return [2*B, 197, 384], two global crops
-
-        # # select patches
-        # if maps is not None and self.mask_ratio < 1:
-        #     maps = torch.cat(maps) # [2B, 1, 224, 224]
-        #     maps = None if self.pool is None else self.pool(maps) # [2B, 1, 14, 14]
-        #     active_idx = self.patch_sampler(maps) # mask the patches based on the given saliency map, return [B, 148]
-        #     active_idx = active_idx.unsqueeze(-1).repeat(1, 1, self.embed_dim) # default in Sp16: return [B, 148, 384]
-        #     x = torch.gather(x, dim=1, index=active_idx) # default in Sp16: [B, 196, 384] -> [B, 148, 384] # select the subset by the given saliency map
-
-        # for blk in self.blocks:
-        #     x = blk(x)
-
-        # x = self.norm(x) # return [2*B, 197, 384], two global crops
-        # if self.fc_norm is not None:
-        #     x[:, 0] = self.fc_norm(x[:, 1:, :].mean(1))
-        
-        # return_all_tokens = self.return_all_tokens if \
-        #     return_all_tokens is None else return_all_tokens
-        # if return_all_tokens:
-        #     return x # all tokens
-        # return x[:, 0] # only cls_token
-        
     def forward(self, x, n=1):
         x = self.prepare_tokens(x)
         # we return the output tokens from the `n` last blocks

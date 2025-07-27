@@ -14,7 +14,7 @@ def add_training_parser(parser):
     parser.add_argument("-is_local", type=bool, default=False)
     parser.add_argument("-remark", type=str, default="OCTA-500")
     
-    parser.add_argument("-data_path", type=str, default="/home/lwangdk/Enface_NHYY_Image_Label/Image")
+    parser.add_argument("-data_path", type=str, default="data/OCTA-Enface")
     parser.add_argument("-fold", type=int, default=0)
     parser.add_argument("-num_samples", type=int, default=800)
     parser.add_argument("-batch_size", type=int, default=2)

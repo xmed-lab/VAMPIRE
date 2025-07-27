@@ -41,11 +41,11 @@ to_cuda = lambda x: x.to(torch.float).to(device)
 
 ppn, pnn = args.prompt_positive_num, args.prompt_negative_num
 dataset_params = [args.fov, args.label_type, ppn, pnn, args.is_local, False]
-dataset_test = octainhouse_2d_dataset(args.data_path, fold=0)
+dataset_test = octainhouse_2d_dataset(args.data_path)
 
 parameters = [args.fov, args.label_type, args.epochs, args.is_local, args.model_type, args.remark]
 
-save_dir = "test/{}/{}".format(time_str, "_".join(map(str, parameters)))
+save_dir = "seg/{}/{}".format(time_str, "_".join(map(str, parameters)))
 
 sample_n = len(dataset_test)
 

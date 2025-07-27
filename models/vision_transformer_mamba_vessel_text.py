@@ -392,15 +392,6 @@ class Block_M(nn.Module):
         
         hidden_states = self.mixer(hidden_states, inference_params=inference_params)
         
-        # y, attn = self.attn(self.norm1(hidden_states))
-        # if return_attention:
-        #     return attn
-        # if self.gamma_1 is None:
-        #     hidden_states = hidden_states + self.drop_path(y)
-        #     hidden_states = hidden_states + self.drop_path(self.mlp(self.norm2(hidden_states)))
-        # else:
-        #     hidden_states = hidden_states + self.drop_path(self.gamma_1 * y)
-        #     hidden_states = hidden_states +  self.drop_path(self.gamma_2 * self.mlp(self.norm2(hidden_states)))
         return hidden_states, residual
 
 class PatchEmbed(nn.Module):

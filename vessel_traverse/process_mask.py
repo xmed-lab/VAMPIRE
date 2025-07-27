@@ -314,9 +314,6 @@ if __name__ == "__main__":
     with open("img2order.pkl", "wb") as f:
         pickle.dump(img2order, f)
 
-    # ****** save inverse order ******
-    # with open("img2order.pkl", "rb") as f:
-    #     img2order = pickle.load(f)
     img2inverseorder = {}
     for img in img2order:
         order = img2order[img]

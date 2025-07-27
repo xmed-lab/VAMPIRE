@@ -54,7 +54,7 @@ class octainhouse_2d_dataset(Dataset):
 
     def getAllPath(self, root, isTraining):
         items = []
-        filePath = '/home/lwangdk/Enface_FSSY-220825-221230/v1_6binary/folds/train.csv'
+        filePath = 'data/Label/folds_info/train_0.csv'
 
         with open(filePath,'r') as csvFile:
             reader = csv.reader(csvFile)
@@ -68,7 +68,7 @@ class octainhouse_2d_dataset(Dataset):
                 elif left_right == '1' and front_back == 'L':
                     items.append(item[0])
         
-        filePath = '/home/lwangdk/Enface_FSSY-220825-221230/v1_6binary/folds/test.csv'
+        filePath = 'data/Label/folds_info/test_0.csv'
         with open(filePath,'r') as csvFile:
             reader = csv.reader(csvFile)
             header = next(reader)
