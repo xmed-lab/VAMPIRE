@@ -8,7 +8,7 @@ VAMPIRE extracts crucial vascular characteristics through two key components:
 - an Information-Enhanced Morphological (IEM) Module that incorporates comprehensive vessel morphology knowledge.
 
 <div align="center">
-<img src="asset/framework.png" width="80%" />
+<img src="asset/framework.png" width="65%" />
 </div>
 
 ## Data Preparation
