@@ -1,6 +1,6 @@
-# VAMPIRE
+# VAMPIRE: Uncovering Vessel Directional and Morphological Information from OCTA Images for Cardiovascular Disease Risk Factor Prediction
 
-VAMPIRE: a novel multi-purpose paradigm of CVD risk assessment that jointly performs CVD risk and CVD-related condition prediction, aligning with clinical experiences.
+VAMPIRE, Vessel-Aware Mamba-based Prediction model with Informative Enhancement, is a novel multi-purpose paradigm of CVD risk assessment that jointly performs CVD risk and CVD-related condition prediction, aligning with clinical experiences.
 
 ## Overview
 VAMPIRE extracts crucial vascular characteristics through two key components: 
