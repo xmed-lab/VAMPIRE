@@ -379,11 +379,7 @@ def validate_network_vsl(val_loader, model, info_projector, info_projector_text,
             output_feat = [x[:, 0] for x in intermediate_output]
 
             output = torch.cat(output_feat, dim=-1)
-        
-            if args.adverse:
-                output, _ = linear_classifier(output, output_feat, [age_features, gender_features, text_features])
-            else:
-                output = linear_classifier(output)
+            output = linear_classifier(output)
 
             num_class = output.shape[1]
             loss = nn.BCEWithLogitsLoss()(output, target.float())
