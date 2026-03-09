@@ -1,13 +1,13 @@
 # VAMPIRE: Uncovering Vessel Directional and Morphological Information from OCTA Images for Cardiovascular Disease Risk Factor Prediction
 
 <a href="https://papers.miccai.org/miccai-2025/paper/3405_paper.pdf"><img src="https://img.shields.io/badge/Paper-MICCAI2025-green.svg?style=flat-square"></a>
-<a href="https://hkustconnect-my.sharepoint.com/:u:/g/personal/lwangdk_connect_ust_hk/EZK2Ez1_A_tDmU-WevHcYlEBlXwXdTGAdL6wvE-ASaVvNQ?e=NsR9Sn"><img src="https://img.shields.io/badge/Dataset-OCTACVD-orange.svg?style=flat-square"></a>
+<a href="https://huggingface.co/datasets/Luxuriant16/OCTA-CVD"><img src="https://img.shields.io/badge/Dataset-OCTACVD-orange.svg?style=flat-square"></a>
 
 
 VAMPIRE, Vessel-Aware Mamba-based Prediction model with Informative Enhancement, is a novel multi-purpose paradigm of CVD risk assessment that jointly performs CVD risk and CVD-related condition prediction, aligning with clinical experiences.
 
 ## Updates
-- OCTA-CVD dataset is released [here](https://hkustconnect-my.sharepoint.com/:u:/g/personal/lwangdk_connect_ust_hk/EZK2Ez1_A_tDmU-WevHcYlEBlXwXdTGAdL6wvE-ASaVvNQ?e=NsR9Sn).
+- OCTA-CVD dataset is released [here](https://huggingface.co/datasets/Luxuriant16/OCTA-CVD).
 
 ## Overview
 VAMPIRE extracts crucial vascular characteristics through two key components: 
@@ -104,5 +104,6 @@ python finetune.py
   pages = { 649 -- 659 },
 }
 ```
+
 
 
